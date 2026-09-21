@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>F1 | Календарь</title>
+  <title>F1 | Календарь 2026</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="bg-calendar">
+  <div id="bg-layer"></div>
+
   <header>
     <a href="index.html" class="logo">F1<span>.</span>PORTAL</a>
     <nav>
@@ -14,22 +16,223 @@
       <a href="teams.html">Команды</a>
       <a href="drivers.html">Пилоты</a>
       <a href="calendar.html" class="active">Календарь</a>
+      <a href="crashes.html">Аварии</a>
     </nav>
   </header>
 
   <main>
-    <h1>Календарь 2026</h1>
-    <div class="grid">
-      <div class="card fade-in"><h3>Этап 1</h3><p>Гран-при Австралии · Мельбурн</p></div>
-      <div class="card fade-in"><h3>Этап 2</h3><p>Гран-при Китая · Шанхай</p></div>
-      <div class="card fade-in"><h3>Этап 3</h3><p>Гран-при Японии · Сузука</p></div>
-      <div class="card fade-in"><h3>Этап 4</h3><p>Гран-при Бахрейна · Сахир</p></div>
-      <div class="card fade-in"><h3>Этап 5</h3><p>Гран-при Саудовской Аравии · Джидда</p></div>
-      <div class="card fade-in"><h3>Этап 6</h3><p>Гран-при Майами · Майами</p></div>
+    <section class="hero fade-in">
+      <h1>Календарь сезона 2026</h1>
+      <p>22 этапа после отмены Бахрейна и Саудовской Аравии. Новый регламент, новые трассы и шесть спринтов.</p>
+    </section>
+
+    
+    <h2 class="fade-in">Все гонки сезона</h2>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">01</div>
+      <div class="race-info">
+        <h3>Гран-при Австралии</h3>
+        <p class="race-meta">6–8 марта · Мельбурн, трасса Альберт-Парк</p>
+      </div>
     </div>
+
+    <div class="race-card fade-in">
+      <div class="race-round">02</div>
+      <div class="race-info">
+        <h3>Гран-при Китая <span class="sprint-badge">СПРИНТ</span></h3>
+        <p class="race-meta">13–15 марта · Шанхай, Международный автодром Шанхая</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">03</div>
+      <div class="race-info">
+        <h3>Гран-при Японии</h3>
+        <p class="race-meta">27–29 марта · Судзука, трасса Судзука</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">04</div>
+      <div class="race-info">
+        <h3>Гран-при Майами <span class="sprint-badge">СПРИНТ</span></h3>
+        <p class="race-meta">1–3 мая · Майами, Международный автодром Майами</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">05</div>
+      <div class="race-info">
+        <h3>Гран-при Канады <span class="sprint-badge">СПРИНТ</span></h3>
+        <p class="race-meta">22–24 мая · Монреаль, трасса имени Жиля Вильнёва</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">06</div>
+      <div class="race-info">
+        <h3>Гран-при Монако</h3>
+        <p class="race-meta">5–7 июня · Монте-Карло, городская трасса Монако</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">07</div>
+      <div class="race-info">
+        <h3>Гран-при Барселоны-Каталонии</h3>
+        <p class="race-meta">12–14 июня · Барселона, трасса Каталунья</p>
+      </div>
+    </div>
+
+  
+    <div class="race-card fade-in">
+      <div class="race-round">08</div>
+      <div class="race-info">
+        <h3>Гран-при Австрии</h3>
+        <p class="race-meta">26–28 июня · Шпильберг, Ред Булл Ринг</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">09</div>
+      <div class="race-info">
+        <h3>Гран-при Великобритании <span class="sprint-badge">СПРИНТ</span></h3>
+        <p class="race-meta">3–5 июля · Сильверстоун, трасса Сильверстоун</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">10</div>
+      <div class="race-info">
+        <h3>Гран-при Бельгии</h3>
+        <p class="race-meta">17–19 июля · Спа, трасса Спа-Франкоршам</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">11</div>
+      <div class="race-info">
+        <h3>Гран-при Венгрии</h3>
+        <p class="race-meta">24–26 июля · Будапешт, трасса Хунгароринг</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">12</div>
+      <div class="race-info">
+        <h3>Гран-при Нидерландов <span class="sprint-badge">СПРИНТ</span></h3>
+        <p class="race-meta">21–23 августа · Зандворт, трасса Зандворт</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">13</div>
+      <div class="race-info">
+        <h3>Гран-при Италии</h3>
+        <p class="race-meta">4–6 сентября · Монца, Национальный автодром Монцы</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">14</div>
+      <div class="race-info">
+        <h3>Гран-при Мадрида</h3>
+        <p class="race-meta">11–13 сентября · Мадрид, новая городская трасса</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">15</div>
+      <div class="race-info">
+        <h3>Гран-при Азербайджана</h3>
+        <p class="race-meta">25–27 сентября · Баку, городская трасса Баку</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">16</div>
+      <div class="race-info">
+        <h3>Гран-при Сингапура <span class="sprint-badge">СПРИНТ</span></h3>
+        <p class="race-meta">9–11 октября · Сингапур, городская трасса Марина-Бэй</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">17</div>
+      <div class="race-info">
+        <h3>Гран-при США</h3>
+        <p class="race-meta">23–25 октября · Остин, Трасса Америк</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">18</div>
+      <div class="race-info">
+        <h3>Гран-при Мексики</h3>
+        <p class="race-meta">30 октября – 1 ноября · Мехико, Автодром имени братьев Родригес</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">19</div>
+      <div class="race-info">
+        <h3>Гран-при Бразилии</h3>
+        <p class="race-meta">6–8 ноября · Сан-Паулу, Интерлагос</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">20</div>
+      <div class="race-info">
+        <h3>Гран-при Лас-Вегаса</h3>
+        <p class="race-meta">19–21 ноября · Лас-Вегас, городская трасса Лас-Вегаса</p>
+      </div>
+    </div>
+
+
+    <div class="race-card fade-in">
+      <div class="race-round">21</div>
+      <div class="race-info">
+        <h3>Гран-при Катара</h3>
+        <p class="race-meta">27–29 ноября · Лусаил, Международный автодром Лусаила</p>
+      </div>
+    </div>
+
+    
+    <div class="race-card fade-in">
+      <div class="race-round">22</div>
+      <div class="race-info">
+        <h3>Гран-при Абу-Даби</h3>
+        <p class="race-meta">4–6 декабря · Абу-Даби, трасса Яс-Марина</p>
+      </div>
+    </div>
+
+    
+    <p class="race-note fade-in">
+       Гран-при Бахрейна (10–12 апреля) и Саудовской Аравии (17–19 апреля) были отменены из-за конфликта на Ближнем Востоке. Сезон сокращён до 22 этапов.
+    </p>
   </main>
 
-  <footer>© 2026 F1 Portal</footer>
+  <footer>© 2026 F1 Portal. Все права защищены.</footer>
   <script src="script.js"></script>
 </body>
 </html>
