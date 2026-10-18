@@ -1,7 +1,7 @@
-/* ===== СБРОС ===== */
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ===== БАЗА ===== */
+
 body {
   font-family: 'Inter', Arial, sans-serif;
   color: #fff;
@@ -9,12 +9,12 @@ body {
   opacity: 0;
   transition: opacity 0.5s ease;
 
-  /* Фоновое фото — положи картинку в images/bg.jpg */
+
   background: #0a0a0a url('https://s0.rbk.ru/v6_top_pics/media/img/6/65/755833369493656.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
-/* Тёмный слой поверх фото, чтобы текст читался */
+
 body::before {
   content: '';
   position: fixed;
@@ -24,11 +24,10 @@ body::before {
   pointer-events: none;
 }
 
-/* Плавные переходы */
+
 body.loaded { opacity: 1; }
 body.fade-out { opacity: 0; }
 
-/* ===== ШАПКА ===== */
 header {
   background: rgba(15, 15, 15, 0.92);
   backdrop-filter: blur(10px);
@@ -74,7 +73,7 @@ nav a:hover {
 }
 nav a.active { background: #e10600; color: #fff; }
 
-/* ===== КОНТЕНТ ===== */
+
 main {
   padding: 60px 40px;
   max-width: 1200px;
@@ -117,7 +116,7 @@ p {
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
 }
 
-/* ===== КАРТОЧКИ ===== */
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -157,7 +156,7 @@ p {
 .card p { color: #bbb; margin-bottom: 8px; }
 .card strong { color: #e10600; }
 
-/* ===== АНИМАЦИЯ ПОЯВЛЕНИЯ ===== */
+
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -173,7 +172,7 @@ p {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== HERO ===== */
+
 .hero {
   text-align: center;
   padding: 100px 20px;
@@ -186,7 +185,7 @@ p {
 .hero h1::after { margin: 20px auto 0; }
 .hero p { font-size: 18px; color: #ccc; }
 
-/* ===== ТАБЛИЦА ===== */
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -212,7 +211,7 @@ th {
 td { color: #ddd; }
 tr:hover td { background: rgba(225, 6, 0, 0.08); }
 
-/* ===== ФУТЕР ===== */
+
 footer {
   text-align: center;
   padding: 30px;
@@ -224,7 +223,7 @@ footer {
   -webkit-backdrop-filter: blur(6px);
 }
 
-/* ===== АДАПТИВ ===== */
+
 @media (max-width: 768px) {
   header { padding: 15px 20px; }
   .logo { font-size: 22px; }
