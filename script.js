@@ -1,7 +1,6 @@
-// Общие действия для всех страниц сайта.
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Показываем страницу после загрузки HTML.
+  
   document.body.classList.add('loaded');
 
   // Подсвечиваем пункт меню, который ведёт на открытую страницу.
@@ -13,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Плавный переход работает только для внутренних HTML-страниц.
+
   document.querySelectorAll('a[href$=".html"]').forEach((link) => {
     link.addEventListener('click', (event) => {
       const destination = link.getAttribute('href');
@@ -27,14 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Блок отзывов есть только на главной странице.
+
   const messageForm = document.getElementById('messageForm');
   if (messageForm) {
     setupMessages(messageForm);
   }
 });
 
-// Настройка формы отзывов: загрузка списка и отправка нового сообщения.
+
 function setupMessages(form) {
   const input = document.getElementById('userMessage');
   const list = document.getElementById('messagesList');
@@ -65,7 +64,7 @@ function setupMessages(form) {
         author.textContent = 'Гость';
 
         const text = document.createElement('p');
-        // textContent не позволяет выполнить HTML или JavaScript из отзыва.
+        
         text.textContent = message.text;
 
         item.append(author, text);
