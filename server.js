@@ -1,51 +1,108 @@
+// Сервер сайта F1 Portal.
+// Он раздаёт страницы сайта и обрабатывает отзывы посетителей.
+
 const express = require('express');
 const fs = require('fs');
-const cors = require('cors');
+const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+const DATA_FILE = path.join(__dirname, 'messages.json');
+const MAX_MESSAGE_LENGTH = 500;
+const MAX_MESSAGES = 100;
 
+app.use(express.json({ limit: '10kb' }));
 
-app.use(cors());
+// Создаём файл с отзывами при первом запуске, если его ещё нет.
+function prepareMessagesFile() {
+  if (!fs.existsSync(DATA_FILE)) {
+    fs.writeFileSync(DATA_FILE, '[]', 'utf8');
+  }
+}
 
-app.use(express.json());
+// Читаем отзывы из файла. Если файл повреждён, сервер вернёт понятную ошибку.
+function readMessages() {
+  prepareMessagesFile();
+  const fileContent = fs.readFileSync(DATA_FILE, 'utf8');
+  const messages = JSON.parse(fileContent);
 
+  if (!Array.isArray(messages)) {
+    throw new Error('Файл отзывов должен содержать массив');
+  }
 
+  return messages;
+}
+
+// Сохраняем массив отзывов в JSON-файл.
+function saveMessages(messages) {
+  fs.writeFileSync(DATA_FILE, JSON.stringify(messages, null, 2), 'utf8');
+}
+
+// Получение всех отзывов.
 app.get('/api/messages', (req, res) => {
-    try {
-        const data = fs.readFileSync('./messages.json', 'utf8');
-        res.json(JSON.parse(data)); 
-    } catch (error) {
-        res.status(500).json({ error: "Ошибка чтения базы данных" });
-    }
+  try {
+    const messages = readMessages();
+    res.json(messages);
+  } catch (error) {
+    console.error('Не удалось прочитать отзывы:', error.message);
+    res.status(500).json({ error: 'Не удалось загрузить отзывы' });
+  }
 });
 
+// Добавление нового отзыва.
+app.post('/api/messages', (req, res) => {
+  const text = typeof req.body.text === 'string' ? req.body.text.trim() : '';
 
-app.post('/api/message', (req, res) => {
-    const newMessage = req.body.text; 
-    
-    if (!newMessage) {
-        return res.status(400).json({ success: false, error: "Пустой текст" });
-    }
+  if (!text) {
+    return res.status(400).json({ error: 'Напишите текст отзыва' });
+  }
 
-    try {
-       
-        const data = fs.readFileSync('./messages.json', 'utf8');
-        const messages = JSON.parse(data);
-        
-       
-        messages.push({ id: Date.now(), text: newMessage });
-     
-        fs.writeFileSync('./messages.json', JSON.stringify(messages, null, 2));
-        
-    
-        res.json({ success: true, message: "Сообщение сохранено!" });
-    } catch (error) {
-        res.status(500).json({ success: false, error: "Ошибка записи" });
-    }
+  if (text.length > MAX_MESSAGE_LENGTH) {
+    return res.status(400).json({
+      error: `Отзыв должен быть не длиннее ${MAX_MESSAGE_LENGTH} символов`
+    });
+  }
+
+  try {
+    const messages = readMessages();
+    const newMessage = {
+      id: Date.now(),
+      text,
+      date: new Date().toISOString()
+    };
+
+    messages.push(newMessage);
+
+    // Оставляем последние отзывы, чтобы файл не рос бесконечно.
+    const recentMessages = messages.slice(-MAX_MESSAGES);
+    saveMessages(recentMessages);
+
+    res.status(201).json({ success: true, message: newMessage });
+  } catch (error) {
+    console.error('Не удалось сохранить отзыв:', error.message);
+    res.status(500).json({ error: 'Не удалось сохранить отзыв' });
+  }
 });
 
+// Не отдаём посетителям файлы с данными и служебные файлы проекта.
+app.use((req, res, next) => {
+  if (req.path.startsWith('/node_modules') || /\.(json|txt)$/i.test(req.path) || req.path === '/server.js') {
+    return res.sendStatus(404);
+  }
+  next();
+});
+
+// Если запрос пришёл не к API, отдаём страницы, стили и скрипты сайта.
+app.use(express.static(__dirname));
+
+// Обработка неправильного JSON в запросе.
+app.use((error, req, res, next) => {
+  if (error instanceof SyntaxError && error.status === 400 && 'body' in error) {
+    return res.status(400).json({ error: 'Проверьте формат отправляемых данных' });
+  }
+  next(error);
+});
 
 app.listen(PORT, () => {
-    console.log(`Бэкенд запущен на http://localhost:${PORT}`);
+  console.log(`Сайт запущен: http://localhost:${PORT}`);
 });
