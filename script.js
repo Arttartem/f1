@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   document.body.classList.add('loaded');
 
-  // Подсвечиваем пункт меню, который ведёт на открытую страницу.
+
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('nav a').forEach((link) => {
     const linkPage = link.getAttribute('href');
