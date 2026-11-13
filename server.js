@@ -1,5 +1,4 @@
-// Сервер сайта F1 Portal.
-// Он раздаёт страницы сайта и обрабатывает отзывы посетителей.
+
 
 const express = require('express');
 const fs = require('fs');
@@ -13,14 +12,13 @@ const MAX_MESSAGES = 100;
 
 app.use(express.json({ limit: '10kb' }));
 
-// Создаём файл с отзывами при первом запуске, если его ещё нет.
+
 function prepareMessagesFile() {
   if (!fs.existsSync(DATA_FILE)) {
     fs.writeFileSync(DATA_FILE, '[]', 'utf8');
   }
 }
 
-// Читаем отзывы из файла. Если файл повреждён, сервер вернёт понятную ошибку.
 function readMessages() {
   prepareMessagesFile();
   const fileContent = fs.readFileSync(DATA_FILE, 'utf8');
@@ -33,12 +31,11 @@ function readMessages() {
   return messages;
 }
 
-// Сохраняем массив отзывов в JSON-файл.
 function saveMessages(messages) {
   fs.writeFileSync(DATA_FILE, JSON.stringify(messages, null, 2), 'utf8');
 }
 
-// Получение всех отзывов.
+
 app.get('/api/messages', (req, res) => {
   try {
     const messages = readMessages();
@@ -49,7 +46,7 @@ app.get('/api/messages', (req, res) => {
   }
 });
 
-// Добавление нового отзыва.
+
 app.post('/api/messages', (req, res) => {
   const text = typeof req.body.text === 'string' ? req.body.text.trim() : '';
 
@@ -73,7 +70,7 @@ app.post('/api/messages', (req, res) => {
 
     messages.push(newMessage);
 
-    // Оставляем последние отзывы, чтобы файл не рос бесконечно.
+    
     const recentMessages = messages.slice(-MAX_MESSAGES);
     saveMessages(recentMessages);
 
@@ -84,7 +81,7 @@ app.post('/api/messages', (req, res) => {
   }
 });
 
-// Не отдаём посетителям файлы с данными и служебные файлы проекта.
+
 app.use((req, res, next) => {
   if (req.path.startsWith('/node_modules') || /\.(json|txt)$/i.test(req.path) || req.path === '/server.js') {
     return res.sendStatus(404);
@@ -92,10 +89,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// Если запрос пришёл не к API, отдаём страницы, стили и скрипты сайта.
+
 app.use(express.static(__dirname));
 
-// Обработка неправильного JSON в запросе.
+
 app.use((error, req, res, next) => {
   if (error instanceof SyntaxError && error.status === 400 && 'body' in error) {
     return res.status(400).json({ error: 'Проверьте формат отправляемых данных' });
